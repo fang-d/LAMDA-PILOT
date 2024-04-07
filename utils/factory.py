@@ -7,7 +7,7 @@ def get_model(model_name, args):
     elif name == "adam_ssf":
         from models.adam_ssf import Learner
     elif name == "adam_vpt":
-        from models.adam_vpt import Learner 
+        from models.adam_vpt import Learner
     elif name == "adam_adapter":
         from models.adam_adapter import Learner
     elif name == "l2p":
@@ -28,11 +28,19 @@ def get_model(model_name, args):
         from models.foster import Learner
     elif name == "memo":
         from models.memo import Learner
-    elif name == 'ranpac':
+    elif name == "ranpac":
         from models.ranpac import Learner
     elif name == "ease":
         from models.ease import Learner
+    elif name == "acil":
+        from models.acil import ACIL as Learner
+    elif name == "g-acil":
+        from models.gacil import GACIL as Learner
+    elif name == "gkeal":
+        from models.gkeal import GKEAL as Learner
+    elif name == "ds-al":
+        from models.dsal import DSAL as Learner
     else:
         assert 0
-    
+
     return Learner(args)

@@ -48,6 +48,8 @@ Welcome to PILOT, a pre-trained model-based continual learning toolbox <a href="
 - `Coil`: Co-Transport for Class-Incremental Learning. ACMMM 2021 [[paper](https://arxiv.org/abs/2107.12654)]
 - `DER`: DER: Dynamically Expandable Representation for Class Incremental Learning. CVPR 2021 [[paper](https://arxiv.org/abs/2103.16788)]
 - `FOSTER`: Feature Boosting and Compression for Class-incremental Learning. ECCV 2022 [[paper](https://arxiv.org/abs/2204.04662)]
+- `ACIL`: ACIL: Analytic Class-Incremental Learning with Absolute Memorization and Privacy Protection. NeurIPS 2022 [[paper](https://proceedings.neurips.cc/paper_files/paper/2022/hash/4b74a42fc81fc7ee252f6bcb6e26c8be-Abstract-Conference.html)]
+- `GKEAL`: GKEAL: Gaussian Kernel Embedded Analytic Learning for Few-Shot Class Incremental Task. CVPR 2023 [[paper](https://openaccess.thecvf.com/content/CVPR2023/html/Zhuang_GKEAL_Gaussian_Kernel_Embedded_Analytic_Learning_for_Few-Shot_Class_Incremental_CVPR_2023_paper.html)]
 - `MEMO`: A Model or 603 Exemplars: Towards Memory-Efficient Class-Incremental Learning. ICLR 2023 Spotlight [[paper](https://openreview.net/forum?id=S07feAlQHgM)]
 - `SimpleCIL`: Revisiting Class-Incremental Learning with Pre-Trained Models: Generalizability and Adaptivity are All You Need. arXiv 2023 [[paper](https://arxiv.org/abs/2303.07338)]
 - `L2P`: Learning to Prompt for Continual Learning. CVPR 2022 [[paper](https://arxiv.org/abs/2112.08654)]
@@ -56,6 +58,8 @@ Welcome to PILOT, a pre-trained model-based continual learning toolbox <a href="
 - `ADAM`: Revisiting Class-Incremental Learning with Pre-Trained Models: Generalizability and Adaptivity are All You Need. arXiv 2023 [[paper](https://arxiv.org/abs/2303.07338)]
 - `RanPAC`: RanPAC: Random Projections and Pre-trained Models for Continual Learning. NeurIPS 2023 [[paper](https://arxiv.org/abs/2307.02251)]
 - `Ease`: Expandable Subspace Ensemble for Pre-Trained Model-Based Class-Incremental Learning. CVPR 2024 [[paper](https://arxiv.org/abs/2403.12030)]
+- `DS-AL`: DS-AL: A Dual-Stream Analytic Learning for Exemplar-Free Class-Incremental Learning. AAAI 2024 [[paper](https://ojs.aaai.org/index.php/AAAI/article/view/29670)]
+- `G-ACIL`: G-ACIL: Analytic Learning for Exemplar-Free Generalized Class Incremental Learning. arXiv 2024 [[paper](https://arxiv.org/abs/2403.15706)]
 
 > Intended authors are welcome to contact us to reproduce your methods in our repo. Feel free to merge your algorithm into PILOT if you are using our codebase!
 
@@ -73,7 +77,7 @@ Welcome to PILOT, a pre-trained model-based continual learning toolbox <a href="
 <img src="./resources/imagenetRb0inc20.jpg" width="600px">
 </div>
 
-> For exemplar parameters, Coil, DER, iCaRL, MEMO, and FOSTER set the `fixed_memory` option to false and retain the `memory_size` of 2000 for CIFAR100, while setting `fixed_memory` option to true and retaining the `memory_per_class` of 20 for ImageNet-R. On the contrary, other models are exemplar-free.
+> For exemplar parameters, Coil, DER, iCaRL, MEMO, and FOSTER set the `fixed_memory` option to false and retain the `memory_size` of 2000 for CIFAR-100, while setting `fixed_memory` option to true and retaining the `memory_per_class` of 20 for ImageNet-R. On the contrary, other models are exemplar-free.
 
 ## ☄️ how to use
 
@@ -123,7 +127,7 @@ cd LAMDA-PILOT
 
 We have implemented the pre-processing datasets as follows:
 
-- **CIFAR100**: will be automatically downloaded by the code.
+- **CIFAR-100**: will be automatically downloaded by the code.
 - **CUB200**:  Google Drive: [link](https://drive.google.com/file/d/1XbUpnWpJPnItt5zQ6sHJnsjPncnNLvWb/view?usp=sharing) or Onedrive: [link](https://entuedu-my.sharepoint.com/:u:/g/personal/n2207876b_e_ntu_edu_sg/EVV4pT9VJ9pBrVs2x0lcwd0BlVQCtSrdbLVfhuajMry-lA?e=L6Wjsc)
 - **ImageNet-R**: Google Drive: [link](https://drive.google.com/file/d/1SG4TbiL8_DooekztyCVK8mPmfhMo8fkR/view?usp=sharing) or Onedrive: [link](https://entuedu-my.sharepoint.com/:u:/g/personal/n2207876b_e_ntu_edu_sg/EU4jyLL29CtBsZkB6y-JSbgBzWF5YHhBAUz1Qw8qM2954A?e=hlWpNW)
 - **ImageNet-A**: Google Drive: [link](https://drive.google.com/file/d/19l52ua_vvTtttgVRziCZJjal0TPE9f2p/view?usp=sharing) or Onedrive: [link](https://entuedu-my.sharepoint.com/:u:/g/personal/n2207876b_e_ntu_edu_sg/ERYi36eg9b1KkfEplgFTW3gBg1otwWwkQPSml0igWBC46A?e=NiTUkL)
@@ -133,7 +137,7 @@ We have implemented the pre-processing datasets as follows:
 
 > These subsets are sampled from the original datasets. Please note that I do not have the right to distribute these datasets. If the distribution violates the license, I shall provide the filenames instead.
 
-When training **not** on `CIFAR100`, you should specify the folder of your dataset in `utils/data.py`.
+When training **not** on `CIFAR-100`, you should specify the folder of your dataset in `utils/data.py`.
 
 ```python
     def download_data(self):

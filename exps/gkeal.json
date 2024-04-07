@@ -1,0 +1,22 @@
+{
+    "model_name": "gkeal",
+    "prefix": "GKEAL",
+    "memory_size": 0,
+
+    "dataset": "cifar224",
+    "seed": [1993],
+    "shuffle": true,
+    "device": ["0"],
+
+    "backbone_type": "vit_base_patch16_224",
+    "init_cls": 5,
+    "increment": 5,
+
+    "num_workers": 16,
+    "batch_size": 1024,
+    "inplace_repeat": 1,
+
+    "buffer_size": 16384,
+    "gamma": 5,
+    "sigma": 100
+}
