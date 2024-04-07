@@ -9,8 +9,8 @@
     "device": ["0"],
 
     "backbone_type": "vit_base_patch16_224",
-    "init_cls": 5,
-    "increment": 5,
+    "init_cls": 10,
+    "increment": 10,
 
     "num_workers": 16,
     "batch_size": 1024,
@@ -18,6 +18,6 @@
 
     "buffer_size": 16384,
     "gamma": 5,
-    "gamma_comp": 5,
-    "compensation_ratio": 1
+    "gamma_comp": 1,
+    "compensation_ratio": 0.6
 }
