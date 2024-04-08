@@ -16,6 +16,10 @@
     "batch_size": 1024,
     "inplace_repeat": 1,
 
-    "buffer_size": 16384,
-    "gamma": 5
+    "configurations": {
+        "cifar224": {
+            "buffer_size": 16384,
+            "gamma": 500
+        }
+    }
 }

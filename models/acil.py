@@ -108,6 +108,7 @@ class ACILNet(BaseNet):
 
 class ACIL(BaseLearner):
     def __init__(self, args: Dict[str, Any]) -> None:
+        args.update(args["configurations"][args["dataset"]])
         if "memory_size" not in args:
             args["memory_size"] = 0
         elif args["memory_size"] != 0:
@@ -119,6 +120,7 @@ class ACIL(BaseLearner):
         self.parse_args(args)
 
         self.create_network()
+        self.backbone_transform = self._network.backbone_transform
         self._network.generate_buffer()
         self._network.generate_fc()
 
@@ -150,7 +152,6 @@ class ACIL(BaseLearner):
             gamma=self.gamma,
             device=self._device,
         )
-        self.backbone_transform = self._network.backbone_transform
 
     def incremental_train(self, data_manager: DataManager) -> None:
         self._cur_task += 1

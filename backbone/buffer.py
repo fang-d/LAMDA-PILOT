@@ -22,6 +22,7 @@ References:
 import torch
 from typing import Optional, Union, Callable
 from abc import ABCMeta, abstractmethod
+import logging
 
 __all__ = [
     "Buffer",
@@ -95,6 +96,14 @@ class GaussianKernel(Buffer):
 
     def init(self, X: torch.Tensor, size: Optional[int] = None) -> None:
         if size is not None:
-            idx = torch.randperm(size).to(X.device)
-            X = X[idx]
+            if size <= X.shape[0]:
+                idx = torch.randperm(size).to(X.device)
+                X = X[idx]
+            else:
+                logging.warning("The buffer size is suggested to be greater than the number of initial samples.")
+                logging.info("Generate center vectors randomly.")
+                n_require = size - X.shape[0]
+                W_proj = torch.normal(mean=0, std=1, size=(n_require, X.shape[0])).to(X)
+                W_proj /= torch.sum(W_proj, dim=0)
+                X = torch.cat([X, W_proj @ X], dim=0)
         self.mean = X
