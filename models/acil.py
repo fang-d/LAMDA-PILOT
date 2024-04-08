@@ -69,7 +69,7 @@ class ACILNet(BaseNet):
         self.dtype = dtype
 
         config = resolve_data_config(self.backbone.pretrained_cfg, model=self.backbone)
-        self.backbone_transform = create_transform(**config).transforms
+        self.backbone_transform: List = create_transform(**config).transforms
 
     @torch.no_grad()
     def forward(self, X: torch.Tensor) -> Dict[str, torch.Tensor]:
@@ -117,9 +117,18 @@ class ACIL(BaseLearner):
             )
         super().__init__(args)
         self.parse_args(args)
+
         self.create_network()
+        self._network.generate_buffer()
+        self._network.generate_fc()
+
         # As a simple example, we freeze the backbone network of the AL-based CIL methods.
         self._network.freeze()
+
+        if len(self._multiple_gpus) > 1:
+            self._network.backbone = torch.nn.DataParallel(
+                self._network.backbone, self._multiple_gpus
+            )
 
     def parse_args(self, args: Dict[str, Any]) -> None:
         # Bigger batch size leads faster learning speed, >= 4096 for ImageNet.
@@ -141,14 +150,7 @@ class ACIL(BaseLearner):
             gamma=self.gamma,
             device=self._device,
         )
-
-        self._network.generate_buffer()
-        self._network.generate_fc()
-
-        if len(self._multiple_gpus) > 1:
-            self._network.backbone = torch.nn.DataParallel(
-                self._network.backbone, self._multiple_gpus
-            )
+        self.backbone_transform = self._network.backbone_transform
 
     def incremental_train(self, data_manager: DataManager) -> None:
         self._cur_task += 1
@@ -156,7 +158,7 @@ class ACIL(BaseLearner):
             # As the AL-based methods for large pre-train models frozen the backbone network,
             # we replace the default transform with the transform provided by timm.
             data_manager._test_trsf = []
-            data_manager._common_trsf = self._network.backbone_transform
+            data_manager._common_trsf = self.backbone_transform
 
         self._total_classes = self._known_classes + data_manager.get_task_size(
             self._cur_task
