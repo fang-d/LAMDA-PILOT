@@ -83,6 +83,7 @@ class DSALNet(ACILNet):
         )
 
     def generate_fc(self, *_) -> None:
+        print("Generate FC")
         # Main stream
         self.fc = RecursiveLinear(
             self.buffer_size,

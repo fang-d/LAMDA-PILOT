@@ -68,11 +68,8 @@ class ACILNet(BaseNet):
         self.device = device
         self.dtype = dtype
 
-    @property
-    def backbone_transform(self) -> List:
         config = resolve_data_config(self.backbone.pretrained_cfg, model=self.backbone)
-        transforms = create_transform(**config).transforms
-        return transforms
+        self.backbone_transform = create_transform(**config).transforms
 
     @torch.no_grad()
     def forward(self, X: torch.Tensor) -> Dict[str, torch.Tensor]:
@@ -121,8 +118,6 @@ class ACIL(BaseLearner):
         super().__init__(args)
         self.parse_args(args)
         self.create_network()
-        self._network.generate_buffer()
-        self._network.generate_fc()
         # As a simple example, we freeze the backbone network of the AL-based CIL methods.
         self._network.freeze()
 
@@ -146,6 +141,9 @@ class ACIL(BaseLearner):
             gamma=self.gamma,
             device=self._device,
         )
+
+        self._network.generate_buffer()
+        self._network.generate_fc()
 
         if len(self._multiple_gpus) > 1:
             self._network.backbone = torch.nn.DataParallel(

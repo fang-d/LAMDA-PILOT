@@ -17,7 +17,7 @@
     "inplace_repeat": 1,
 
     "buffer_size": 16384,
-    "gamma": 5,
+    "gamma": 500,
     "gamma_comp": 1,
     "compensation_ratio": 0.6
 }
