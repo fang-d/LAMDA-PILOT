@@ -3,14 +3,14 @@
     "prefix": "ACIL",
     "memory_size": 0,
 
-    "dataset": "cifar224",
+    "dataset": "ImageNetR",
     "seed": [1993],
     "shuffle": true,
     "device": ["0"],
 
     "backbone_type": "vit_base_patch16_224",
-    "init_cls": 10,
-    "increment": 10,
+    "init_cls": 20,
+    "increment": 20,
 
     "num_workers": 16,
     "batch_size": 1024,
@@ -20,6 +20,10 @@
         "cifar224": {
             "buffer_size": 16384,
             "gamma": 500
+        },
+        "ImageNetR": {
+            "buffer_size": 16384,
+            "gamma": 1000
         }
     }
 }

@@ -125,7 +125,7 @@ class ACIL(BaseLearner):
         self._network.generate_fc()
 
         # As a simple example, we freeze the backbone network of the AL-based CIL methods.
-        self._network.freeze()
+        # self._network.freeze()
 
         if len(self._multiple_gpus) > 1:
             self._network.backbone = torch.nn.DataParallel(

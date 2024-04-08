@@ -20,6 +20,10 @@
         "cifar224": {
             "buffer_size": 16384,
             "gamma": 500
+        },
+        "ImageNetR": {
+            "buffer_size": 16384,
+            "gamma": 1000
         }
     }
 }

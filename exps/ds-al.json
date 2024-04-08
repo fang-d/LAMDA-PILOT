@@ -3,7 +3,7 @@
     "prefix": "DS-AL",
     "memory_size": 0,
 
-    "dataset": "cifar224",
+    "dataset": "ImageNetR",
     "seed": [1993],
     "shuffle": true,
     "device": ["0"],
@@ -21,6 +21,12 @@
             "buffer_size": 16384,
             "gamma": 500,
             "gamma_comp": 500,
+            "compensation_ratio": 1
+        },
+        "ImageNetR": {
+            "buffer_size": 16384,
+            "gamma": 1000,
+            "gamma_comp": 1000,
             "compensation_ratio": 1
         }
     }
